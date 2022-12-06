@@ -11,7 +11,7 @@ pipeline {
                 component: ci
             spec:
                 containers:
-                - name: python
+                    - name: python
                     command:
                         - cat
                     image: python:3.7
