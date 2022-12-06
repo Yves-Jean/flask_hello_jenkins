@@ -6,16 +6,16 @@ pipeline {
             yaml """
             apiVersion: v1
             kind: Pod
-            metadata:  
-                labels:    
+            metadata:
+                labels:
                 component: ci
-                spec:  
-                    containers:    
-                        - name: python      
-                        image: python:3.7      
-                        command:        
-                            - cat      
-                        tty: true
+            spec:
+                containers:
+                    - command:
+                        - cat
+                    name: python
+                    image: python:3.7
+                    tty: true
             """    
                 }  
     }
