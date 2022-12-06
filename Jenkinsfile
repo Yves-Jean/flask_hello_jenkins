@@ -2,21 +2,23 @@ pipeline {
     agent {    
         kubernetes {
             // this label will be the prefix of the generated pod's name      
-            label 'jenkins-agent-my-app'      
-            yaml """
-            apiVersion: v1
-            kind: Pod
-            metadata:
-                labels:
-                component: ci
-            spec:
-                containers:
-                    - name: python
-                    command:
-                        - cat
-                    image: python:3.7
-                    tty: true
-            """    
+            label 'jenkins-agent-my-app'
+            cloud "kubernetes"      
+            yaml '''
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: default
+  labels:
+  component: ci
+spec:
+  containers:
+    - name: python
+      command:
+        - cat
+      image: python:3.7
+      tty: true
+'''    
                 }  
     }
     stages {    
