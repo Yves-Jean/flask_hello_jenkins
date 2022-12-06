@@ -11,9 +11,9 @@ pipeline {
                 component: ci
             spec:
                 containers:
+                - name: python
                     command:
                         - cat
-                    name: python
                     image: python:3.7
                     tty: true
             """    
