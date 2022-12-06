@@ -12,7 +12,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   namespace: default
-  labels: 
+  labels:
+    job: build-pod
   component: ci
 spec:
   containers:
