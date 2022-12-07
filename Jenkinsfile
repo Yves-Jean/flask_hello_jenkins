@@ -55,9 +55,18 @@ spec:
         stage('Build image') {      
             steps {        
                 container('docker') {          
-                    sh "docker build -t localhost:4000/pythontest:latest ."          
-                    sh "docker push localhost:4000/pythontest:latest"        
+                    sh "docker build -t localhost:4000/pythontest:latest ."         
+                    
                 }      
+            }
+        }
+        stage("Push Docker Image"){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME',passwordVariable:"DOCKER_HUB_PASSWORD")]) {
+                    sh 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
+                }
+               sh "docker push jeanpcr94/pythontest:latest"        
+                
             }
         }
         stage('Deploy') {      
