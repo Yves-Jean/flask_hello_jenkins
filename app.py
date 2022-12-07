@@ -12,7 +12,7 @@ def hello_world():
 def hello_user(username):
     return'Hello %s!\n'% username   
 
-@app.route('/feature1/<username>') # dynamic route
+@app.route('/feature/<username>') # dynamic route
 def feature_user(username):
     return'Feature of %s!\n'% username   
 
