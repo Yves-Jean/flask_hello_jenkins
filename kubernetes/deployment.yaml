@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pythontest
+  name: hello-flask
   labels:
-    app: pythontest
+    app: hello-flask
 spec:
   selector:
     matchLabels:
-    app: pythontest
+      app: hello-flask
     strategy:
       type: Recreate
-      replicas: 1
-      template:
-        metadata:labels:
-          app: pythontest
-        spec:
-          containers:
-            - image: localhost:4000/pythontest:latest
-              name: pythontest
-              ports:
-                - containerPort: 5000
-                  name: microport
+    replicas: 1
+    template:
+      metadata:labels:
+        app: hello-flask
+      spec:
+        containers:
+          - image: jeanpcr94/hello-flask:latest
+            name: hello-flask
+            ports:
+              - containerPort: 5000
+                name: microport
