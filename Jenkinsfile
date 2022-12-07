@@ -15,6 +15,7 @@ metadata:
     job: build-pod
   component: ci
 spec:
+  serviceAccountName: jenkins-admin
   containers:
     - name: python
       command:
