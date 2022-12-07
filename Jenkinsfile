@@ -14,9 +14,7 @@ metadata:
   labels:
     job: build-pod
   component: ci
-  namespace: devops-tools
 spec:
-  serviceAccountName: jenkins-admin
   containers:
     - name: python
       command:
@@ -33,7 +31,7 @@ spec:
         - mountPath: /var/run/docker.sock
           name: docker-sock
     - name: kubectl
-      image: lachlanevenson/k8s-kubectl:v1.25.3 # use a version that match
+      image: lachlanevenson/k8s-kubectl:v1.17.2 # use a version that match
       command:        
         - cat
       tty: true
@@ -57,27 +55,25 @@ spec:
         stage('Build image') {      
             steps {        
                 container('docker') {          
-                    sh "docker build -t jeanpcr94/hello-flask:latest ."         
+                    sh "docker build -t localhost:4000/pythontest:latest ."         
                     
                 }      
             }
         }
         stage("Push Docker Image"){
             steps{
-                container('docker') { 
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME',passwordVariable:"DOCKER_HUB_PASSWORD")]) {
-                        sh 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
-                    }   
-                    sh "docker push jeanpcr94/hello-flask:latest"        
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME',passwordVariable:"DOCKER_HUB_PASSWORD")]) {
+                    sh 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
                 }
+               sh "docker push jeanpcr94/pythontest:latest"        
                 
             }
         }
         stage('Deploy') {      
             steps {        
                 container('kubectl') {          
-                    echo 'sh "kubectl apply -f ./kubernetes/deployment.yaml"   '       
-                    echo 'sh "kubectl apply -f ./kubernetes/service.yaml" '       
+                    sh "kubectl apply -f ./kubernetes/deployment.yaml"          
+                    sh "kubectl apply -f ./kubernetes/service.yaml"        
                 }      
             }    
         }  
