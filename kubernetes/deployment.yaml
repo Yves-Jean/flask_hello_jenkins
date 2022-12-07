@@ -8,16 +8,16 @@ spec:
   selector:
     matchLabels:
       app: hello-flask
-    strategy:
-      type: Recreate
-    replicas: 1
-    template:
-      metadata:labels:
-        app: hello-flask
-      spec:
-        containers:
-          - image: jeanpcr94/hello-flask:latest
-            name: hello-flask
-            ports:
-              - containerPort: 5000
-                name: microport
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:labels:
+      app: hello-flask
+    spec:
+      containers:
+        - image: jeanpcr94/hello-flask:latest
+          name: hello-flask
+          ports:
+            - containerPort: 5000
+              name: microport
