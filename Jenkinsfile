@@ -14,6 +14,7 @@ metadata:
   labels:
     job: build-pod
   component: ci
+  namespace: devops-tools
 spec:
   serviceAccountName: jenkins-admin
   containers:
@@ -32,7 +33,7 @@ spec:
         - mountPath: /var/run/docker.sock
           name: docker-sock
     - name: kubectl
-      image: lachlanevenson/k8s-kubectl:v1.17.2 # use a version that match
+      image: lachlanevenson/k8s-kubectl:v1.25.3 # use a version that match
       command:        
         - cat
       tty: true
