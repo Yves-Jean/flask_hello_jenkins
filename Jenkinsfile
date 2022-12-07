@@ -65,10 +65,9 @@ spec:
                 container('docker') { 
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME',passwordVariable:"DOCKER_HUB_PASSWORD")]) {
                         sh 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
-                    }
-                    sh "docker push jeanpcr94/pythontest:latest"        
+                    }   
+                    sh "docker push jeanpcr94/hello-flask:latest"        
                 }
-               sh "docker push jeanpcr94/hello-flask:latest"        
                 
             }
         }
