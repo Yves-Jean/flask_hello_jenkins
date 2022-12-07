@@ -5,9 +5,6 @@ metadata:
   namespace: devops-tools
 spec:
   serviceAccountName: jenkins-admin
-  securityContext:
-    fsGroup: 1000
-    runAsUser: 1000
   replicas: 1
   selector:
     matchLabels:
@@ -20,9 +17,6 @@ spec:
         app: hello-flask
     spec:
       serviceAccountName: jenkins-admin
-      securityContext:
-        fsGroup: 1000
-        runAsUser: 1000
       containers:
         - name: hello-flask
           image: jeanpcr94/hello-flask:latest
