@@ -2,8 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-flask-deployment
-  namespace: default
+  namespace: devops-tools
 spec:
+  serviceAccountName: jenkins-admin
+  securityContext:
+    fsGroup: 1000
+    runAsUser: 1000
   replicas: 1
   selector:
     matchLabels:
