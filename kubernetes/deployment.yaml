@@ -4,7 +4,6 @@ metadata:
   name: hello-flask-deployment
   namespace: devops-tools
 spec:
-  serviceAccountName: jenkins-admin
   replicas: 1
   selector:
     matchLabels:
